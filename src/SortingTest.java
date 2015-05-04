@@ -144,8 +144,51 @@ public class SortingTest
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoHeapSort(int[] value)
 	{
-		// TODO : Heap Sort 를 구현하라.
+		for(int i = value.length/2 ; i >= 0 ; i--){
+			poculateDown(value, i, value.length-1);
+		}
+		
+		RecursiveHSort(value, value.length-1);
+		
+		
 		return (value);
+	}
+	private static void RecursiveHSort(int[] maxHeap, int lastIndex){
+		if(lastIndex==0)
+			return;
+
+		int temp = maxHeap[0];
+		maxHeap[0] = maxHeap[lastIndex];
+		maxHeap[lastIndex] = temp;
+		
+		poculateDown(maxHeap, 0, lastIndex-1);
+		
+		RecursiveHSort(maxHeap, lastIndex-1);
+		
+		
+	}
+	
+	private static void poculateDown(int[] value, int root, int lastIndex){
+		int leftChild = 2 * root + 1;
+		int rightChild = 2 * root + 2;
+		
+		if(2*root+1>lastIndex ||(value[root]>=value[leftChild]&&value[root]>=value[rightChild]))
+			return;
+		else{
+			int temp = value[root];
+			int next = leftChild;
+			if(rightChild>lastIndex){}	
+			else if(value[root]<value[rightChild]&&value[root]>=value[leftChild])
+				next = rightChild;
+			else if(value[rightChild]>=value[leftChild]&&value[root]<value[leftChild])
+				next = rightChild;
+			
+			value[root] = value[next];
+			value[next] = temp;
+			poculateDown(value, next, lastIndex);
+				
+			
+		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -237,6 +280,30 @@ public class SortingTest
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoRadixSort(int[] value)
 	{
+		ArrayList<ArrayDeque<Integer>> qArray = new ArrayList<ArrayDeque<Integer>>();
+		for(int i = 0 ; i < 19 ; i++)
+			qArray.add(new ArrayDeque<Integer>());
+		
+		boolean loopFin = true;
+		int divider = 10;
+		while(loopFin){
+			loopFin = false;
+			for(int i = 0 ; i< value.length; i++){
+				loopFin = (loopFin==true || value[i]/divider!=0) ? true : false;
+				qArray.get((value[i]%divider) / (divider/10)+9).add(value[i]);
+			}
+			int j = 0;
+			for(int i = 0 ; i <19 ; i++){
+				while(!qArray.get(i).isEmpty()){
+					value[j] = qArray.get(i).remove();
+					j++;
+					
+				}
+			}
+			divider*=10;
+		
+		}
+			
 		
 		// TODO : Radix Sort 를 구현하라.
 		return (value);
