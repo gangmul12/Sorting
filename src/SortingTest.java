@@ -115,11 +115,7 @@ public class SortingTest
 			if(!changed)
 				break;
 		}
-		// TODO : Bubble Sort 를 구현하라.
-		// value는 정렬안된 숫자들의 배열이며 value.length 는 배열의 크기가 된다.
-		// 결과로 정렬된 배열은 리턴해 주어야 하며, 두가지 방법이 있으므로 잘 생각해서 사용할것.
-		// 주어진 value 배열에서 안의 값만을 바꾸고 value를 다시 리턴하거나
-		// 같은 크기의 새로운 배열을 만들어 그 배열을 리턴할 수도 있다.
+
 		return (value);
 	}
 
@@ -137,7 +133,7 @@ public class SortingTest
 			}
 			value[j+1] = temp;
 		}
-		// TODO : Insertion Sort 를 구현하라.
+
 		return (value);
 	}
 
@@ -148,31 +144,22 @@ public class SortingTest
 			poculateDown(value, i, value.length-1);
 		}
 		
-		RecursiveHSort(value, value.length-1);
-		
+		int temp;
+		for(int last = value.length-1 ; last>=0 ; last--){
+			temp = value[0];
+			value[0] = value[last];
+			value[last] = temp;
+			poculateDown(value, 0, last-1);
+		}
 		
 		return (value);
-	}
-	private static void RecursiveHSort(int[] maxHeap, int lastIndex){
-		if(lastIndex==0)
-			return;
-
-		int temp = maxHeap[0];
-		maxHeap[0] = maxHeap[lastIndex];
-		maxHeap[lastIndex] = temp;
-		
-		poculateDown(maxHeap, 0, lastIndex-1);
-		
-		RecursiveHSort(maxHeap, lastIndex-1);
-		
-		
 	}
 	
 	private static void poculateDown(int[] value, int root, int lastIndex){
 		int leftChild = 2 * root + 1;
 		int rightChild = 2 * root + 2;
 		
-		if(2*root+1>lastIndex ||(value[root]>=value[leftChild]&&value[root]>=value[rightChild]))
+		if(2*root+1>lastIndex ||(value[root]>=value[leftChild]&&value[root]>=value[(rightChild>lastIndex)?lastIndex:rightChild]))
 			return;
 		else{
 			int temp = value[root];
@@ -195,7 +182,7 @@ public class SortingTest
 	private static int[] DoMergeSort(int[] value)
 	{
 		DoRecursiveMSort(value, 0, value.length-1);
-		// TODO : Merge Sort 를 구현하라.
+
 		return (value);
 	}
 	private static void DoRecursiveMSort(int []value, int first, int last){
@@ -246,7 +233,6 @@ public class SortingTest
 	private static int[] DoQuickSort(int[] value)
 	{
 		DoRecursiveQSort(value, 0, value.length-1);
-		// TODO : Quick Sort 를 구현하라.
 		return (value);
 	}
 	private static void DoRecursiveQSort(int[] value, int first, int last){
@@ -305,7 +291,7 @@ public class SortingTest
 		}
 			
 		
-		// TODO : Radix Sort 를 구현하라.
+		
 		return (value);
 	}
 }
