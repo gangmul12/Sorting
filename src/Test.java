@@ -15,10 +15,9 @@ public class Test {
 			while (true) {
 				int[] value; // 입력 받을 숫자들의 배열
 				String nums = br.readLine(); // 첫 줄을 입력 받음
-				
 
 				// 난수일 경우
-				if(nums.charAt(0)=='X')
+				if (nums.charAt(0) == 'X')
 					break;
 
 				String[] nums_arg = nums.split(" ");
@@ -30,44 +29,45 @@ public class Test {
 				Random rand = new Random(); // 난수 인스턴스를 생성한다.
 
 				value = new int[numsize]; // 배열을 생성한다.
-				for (int i = 0; i < value.length; i++){
+				for (int i = 0; i < value.length; i++) {
 					// 각각의 배열에 난수를 생성하여 대입
 					value[i] = rand.nextInt(rmaximum - rminimum + 1) + rminimum;
-					
 
-				// 숫자 입력을 다 받았으므로 정렬 방법을 받아 그에 맞는 정렬을 수행한다.
-				}	
-			
+					// 숫자 입력을 다 받았으므로 정렬 방법을 받아 그에 맞는 정렬을 수행한다.
+				}
 
 				int[] newvalueB = (int[]) value.clone(); // 원래 값의 보호를 위해 복사본을
-				 int[] newvalueI = (int[]) value.clone();
+				int[] newvalueI = (int[]) value.clone();
 				int[] newvalueH = (int[]) value.clone();
-				
-				  int[] newvalueM = (int[]) value.clone(); int[] newvalueQ =
-				 (int[]) value.clone(); int[] newvalueR = (int[])
-				 value.clone();
-				 
-				
+
+				int[] newvalueM = (int[]) value.clone();
+				int[] newvalueQ = (int[]) value.clone();
+				int[] newvalueR = (int[]) value.clone();
+
 				boolean equalCheck = true;
-				
+
 				long t = System.currentTimeMillis();
 				newvalueB = DoBubbleSort(newvalueB);
 				System.out.println((System.currentTimeMillis() - t) + " ms");
 				System.out.println("BubbleSort Done");
-				
-				  t = System.currentTimeMillis(); newvalueI =
-				  DoInsertionSort(newvalueI);
-				  System.out.println((System.currentTimeMillis() - t) + " ms");
-				  for (int i = 0; i < value.length; i++) { if (newvalueB[i] !=
-				  newvalueI[i]) equalCheck = false; } if (!equalCheck) {
-				  System.out
-				  .println("Insertion Sort is not equal to Bubble Sort"); }
-				  else { System.out.println("INSER Sort Checked"); }
-				 
-				
+
+				t = System.currentTimeMillis();
+				newvalueI = DoInsertionSort(newvalueI);
+				System.out.println((System.currentTimeMillis() - t) + " ms");
+				for (int i = 0; i < value.length; i++) {
+					if (newvalueB[i] != newvalueI[i])
+						equalCheck = false;
+				}
+				if (!equalCheck) {
+					System.out
+							.println("Insertion Sort is not equal to Bubble Sort");
+				} else {
+					System.out.println("INSER Sort Checked");
+				}
+
 				t = System.currentTimeMillis();
 				newvalueH = DoHeapSort(newvalueH);
-				
+
 				System.out.println((System.currentTimeMillis() - t) + " ms");
 				for (int i = 0; i < value.length; i++) {
 					if (newvalueB[i] != newvalueH[i])
@@ -78,36 +78,49 @@ public class Test {
 				} else {
 					System.out.println("HEAPS Sort Checked");
 				}
-				
 
-				
-				  t = System.currentTimeMillis(); newvalueM =
-				  DoMergeSort(newvalueM);
-				  System.out.println((System.currentTimeMillis() - t) + " ms");
-				  for (int i = 0; i < value.length; i++) { if (newvalueB[i] !=
-				  newvalueM[i]) equalCheck = false; } if (!equalCheck) {
-				  System.out
-				  .println("MERGE Sort is not equal to Bubble Sort"); } else {
-				  System.out.println("MERGE Sort Checked"); }
-				  
-				  t = System.currentTimeMillis(); newvalueQ =
-				  DoQuickSort(newvalueQ);
-				  System.out.println((System.currentTimeMillis() - t) + " ms");
-				  for (int i = 0; i < value.length; i++) { if (newvalueB[i] !=
-				  newvalueQ[i]) equalCheck = false; } if (!equalCheck) {
-				  System.out
-				  .println("QUICK Sort is not equal to Bubble Sort"); } else {
-				  System.out.println("QUICK Sort Checked"); }
-				  
-				  t = System.currentTimeMillis(); newvalueR =
-				  DoRadixSort(newvalueR);
-				  System.out.println((System.currentTimeMillis() - t) + " ms");
-				  for (int i = 0; i < value.length; i++) { if (newvalueB[i] !=
-				  newvalueR[i]) equalCheck = false; } if (!equalCheck) {
-				  System.out
-				  .println("RADIX Sort is not equal to Bubble Sort"); } else {
-				  System.out.println("RADIX Sort Checked"); }
-				 
+				t = System.currentTimeMillis();
+				newvalueM = DoMergeSort(newvalueM);
+				System.out.println((System.currentTimeMillis() - t) + " ms");
+				for (int i = 0; i < value.length; i++) {
+					if (newvalueB[i] != newvalueM[i])
+						equalCheck = false;
+				}
+				if (!equalCheck) {
+					System.out
+							.println("MERGE Sort is not equal to Bubble Sort");
+				} else {
+					System.out.println("MERGE Sort Checked");
+				}
+
+				t = System.currentTimeMillis();
+				newvalueQ = DoQuickSort(newvalueQ);
+				System.out.println((System.currentTimeMillis() - t) + " ms");
+				for (int i = 0; i < value.length; i++) {
+					if (newvalueB[i] != newvalueQ[i])
+						equalCheck = false;
+				}
+				if (!equalCheck) {
+					System.out
+							.println("QUICK Sort is not equal to Bubble Sort");
+				} else {
+					System.out.println("QUICK Sort Checked");
+				}
+
+				t = System.currentTimeMillis();
+				newvalueR = DoRadixSort(newvalueR);
+				System.out.println((System.currentTimeMillis() - t) + " ms");
+				for (int i = 0; i < value.length; i++) {
+					if (newvalueB[i] != newvalueR[i])
+						equalCheck = false;
+				}
+				if (!equalCheck) {
+					System.out
+							.println("RADIX Sort is not equal to Bubble Sort");
+				} else {
+					System.out.println("RADIX Sort Checked");
+				}
+
 			}
 		} catch (IOException e) {
 			System.out.println("입력이 잘못되었습니다. 오류 : " + e.toString());
@@ -158,26 +171,25 @@ public class Test {
 			poculateDown(value, i, value.length - 1);
 		}
 
-		//RecursiveHSort(value, value.length - 1);
+		// RecursiveHSort(value, value.length - 1);
 		int temp;
-		for(int last = value.length-1 ; last>=0 ; last--){
+		for (int last = value.length - 1; last >= 0; last--) {
 			temp = value[0];
 			value[0] = value[last];
 			value[last] = temp;
-			poculateDown(value, 0, last-1);
+			poculateDown(value, 0, last - 1);
 		}
-		
 
 		return (value);
 	}
-
 
 	private static void poculateDown(int[] value, int root, int lastIndex) {
 		int leftChild = 2 * root + 1;
 		int rightChild = 2 * root + 2;
 
 		if (2 * root + 1 > lastIndex
-				|| (value[root] >= value[leftChild] && value[root] >= value[(rightChild>lastIndex)?lastIndex:rightChild]))
+				|| (value[root] >= value[leftChild] && value[root] >= value[(rightChild > lastIndex) ? lastIndex
+						: rightChild]))
 			return;
 		else {
 			int temp = value[root];
