@@ -96,6 +96,7 @@ public class SortingTest
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoBubbleSort(int[] value)
+	// modification from http://en.wikipedia.org/wiki/Bubble_sort. 아이디어만 가져왔음
 	{
 		
 		int temp = 0;
@@ -141,7 +142,7 @@ public class SortingTest
 	private static int[] DoHeapSort(int[] value)
 	{
 		for(int i = value.length/2 ; i >= 0 ; i--){
-			poculateDown(value, i, value.length-1);
+			percolateDown(value, i, value.length-1);
 		}
 		
 		int temp;
@@ -149,13 +150,13 @@ public class SortingTest
 			temp = value[0];
 			value[0] = value[last];
 			value[last] = temp;
-			poculateDown(value, 0, last-1);
+			percolateDown(value, 0, last-1);
 		}
 		
 		return (value);
 	}
 	
-	private static void poculateDown(int[] value, int root, int lastIndex){
+	private static void percolateDown(int[] value, int root, int lastIndex){
 		int leftChild = 2 * root + 1;
 		int rightChild = 2 * root + 2;
 		
@@ -172,7 +173,7 @@ public class SortingTest
 			
 			value[root] = value[next];
 			value[next] = temp;
-			poculateDown(value, next, lastIndex);
+			percolateDown(value, next, lastIndex);
 				
 			
 		}
