@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Stack;
 
 public class Test {
 
@@ -64,6 +65,7 @@ public class Test {
 				} else {
 					System.out.println("INSER Sort Checked");
 				}
+				equalCheck = true;
 
 				t = System.currentTimeMillis();
 				newvalueH = DoHeapSort(newvalueH);
@@ -78,12 +80,13 @@ public class Test {
 				} else {
 					System.out.println("HEAPS Sort Checked");
 				}
+				equalCheck = true;
 
 				t = System.currentTimeMillis();
 				newvalueM = DoMergeSort(newvalueM);
 				System.out.println((System.currentTimeMillis() - t) + " ms");
 				for (int i = 0; i < value.length; i++) {
-					if (newvalueB[i] != newvalueM[i])
+					if (newvalueH[i] != newvalueM[i])
 						equalCheck = false;
 				}
 				if (!equalCheck) {
@@ -92,12 +95,13 @@ public class Test {
 				} else {
 					System.out.println("MERGE Sort Checked");
 				}
+				equalCheck = true;
 
 				t = System.currentTimeMillis();
 				newvalueQ = DoQuickSort(newvalueQ);
 				System.out.println((System.currentTimeMillis() - t) + " ms");
 				for (int i = 0; i < value.length; i++) {
-					if (newvalueB[i] != newvalueQ[i])
+					if (newvalueH[i] != newvalueQ[i])
 						equalCheck = false;
 				}
 				if (!equalCheck) {
@@ -106,12 +110,13 @@ public class Test {
 				} else {
 					System.out.println("QUICK Sort Checked");
 				}
+				equalCheck = true;
 
 				t = System.currentTimeMillis();
 				newvalueR = DoRadixSort(newvalueR);
 				System.out.println((System.currentTimeMillis() - t) + " ms");
 				for (int i = 0; i < value.length; i++) {
-					if (newvalueB[i] != newvalueR[i])
+					if (newvalueH[i] != newvalueR[i])
 						equalCheck = false;
 				}
 				if (!equalCheck) {
@@ -262,8 +267,44 @@ public class Test {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////
 	private static int[] DoQuickSort(int[] value) {
-		DoRecursiveQSort(value, 0, value.length - 1);
+		iterativeQsort(value);
+		//DoRecursiveQSort(value, 0, value.length - 1);
 		return (value);
+	}
+
+	public static void iterativeQsort(int[] arr) {
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(0);
+		stack.push(arr.length-1);
+		while (!stack.isEmpty()) {
+			int last = stack.pop();
+			int first = stack.pop();
+			if (first >= last)
+				continue;
+			
+			int pivot = arr[first];
+			int lessCursor = first;
+			int temp;
+			int i = first + 1;
+			for (i = first + 1; i < last + 1; i++) {
+				if (arr[i] < pivot) {
+					temp = arr[++lessCursor];
+					arr[lessCursor] = arr[i];
+					arr[i] = temp;
+				}
+			}
+			temp = arr[lessCursor];
+			arr[lessCursor] = arr[first];
+			arr[first] = temp;
+			
+
+			stack.push(lessCursor+1);
+			stack.push(last);
+
+			stack.push(first);
+			stack.push(lessCursor-1);
+
+		}
 	}
 
 	private static void DoRecursiveQSort(int[] value, int first, int last) {
